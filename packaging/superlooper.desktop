@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=RtAudioLinux's SuperLooper
+Comment=Qt5 JACK-based intelligent looper and live sample mixer
+Exec=SuperLooper
+Icon=superlooper
+Categories=Audio;AudioVideo;Music;
+Terminal=false
