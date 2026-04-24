@@ -41,22 +41,22 @@ Install the development packages for:
 - FFmpeg libraries: `libavformat`, `libavcodec`, `libavutil`, `libswresample`
 - RubberBand
 - RtMidi
+- Aubio
 - Optional: soxr
 - Optional: libsamplerate
 - Optional: lilv / LV2
-- Optional: sfizz (planned for later as an integrated SFZ loader)
+- Optional: sfizz (planned for later as an integrated SFZ loader as an alternative to our in-house solution which evolved from the key-based sampler
+)
 
 On Debian/Ubuntu-style systems, the package set is typically similar to:
 
-```bash
 sudo apt install build-essential cmake ninja-build \
   qtbase5-dev qttools5-dev-tools \
   libjack-jackd2-dev libsndfile1-dev \
   libavformat-dev libavcodec-dev libavutil-dev libswresample-dev \
   librubberband-dev librtmidi-dev \
   libsoxr-dev libsamplerate0-dev \
-  lilv-utils liblilv-dev
-```
+  lilv-utils liblilv-dev libaubio-dev
 
 Package names vary by distribution.
 
@@ -64,27 +64,21 @@ Package names vary by distribution.
 
 From the project root:
 
-```bash
 cmake -S . -B build -G Ninja -DBUILD_TESTING=ON
 cmake --build build
 ctest --test-dir build --output-on-failure
-```
 
 Run:
 
-```bash
 ./build/SuperLooper
-```
 
 ## Qt Selection
 
 CMake supports selecting the Qt major version:
 
-```bash
 cmake -S . -B build -G Ninja -DSUPERLOOPER_QT_VERSION=AUTO
 cmake -S . -B build -G Ninja -DSUPERLOOPER_QT_VERSION=5
 cmake -S . -B build -G Ninja -DSUPERLOOPER_QT_VERSION=6
-```
 
 `AUTO` prefers Qt5 when available. If Qt5 is not available and Qt6 is available, it tries Qt6. Qt6 support is present but untested.
 
@@ -92,18 +86,14 @@ cmake -S . -B build -G Ninja -DSUPERLOOPER_QT_VERSION=6
 
 SuperLooper always has FFmpeg swresample available through the FFmpeg dependency. Additional resamplers can be controlled with:
 
-```bash
 cmake -S . -B build -G Ninja -DSUPERLOOPER_WITH_SOXR=ON
 cmake -S . -B build -G Ninja -DSUPERLOOPER_WITH_LIBSAMPLERATE=ON
-```
 
 When built in, soxr is the preferred automatic backend. Runtime selection is available from `Settings -> Audio and Mixer Settings...`.
 
 Optional LV2 support can be controlled with:
 
-```bash
 cmake -S . -B build -G Ninja -DSUPERLOOPER_WITH_LILV=ON
-```
 
 When built in, stereo LV2 plugins can be attached in up to five chained slots per piano key and up to five chained slots on the master output, with per-slot enable toggles and parameter dialogs.
 
@@ -111,9 +101,7 @@ When built in, stereo LV2 plugins can be attached in up to five chained slots pe
 
 Start JACK before connecting the app. Then use:
 
-```text
 Audio -> Connect to JACK
-```
 
 SuperLooper creates two input ports and two output ports, and it tries to auto-connect physical capture and playback ports.
 
@@ -150,10 +138,8 @@ SuperLooper creates two input ports and two output ports, and it tries to auto-c
 
 Use:
 
-```text
 File -> Save State...
 File -> Load State...
-```
 
 State files are JSON. If samples only exist in memory, SuperLooper writes WAV files beside the state file in a sibling sample folder.
 
