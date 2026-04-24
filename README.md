@@ -4,6 +4,9 @@ SuperLooper is a Linux JACK-based intelligent looper built with Qt Widgets. It i
 
 The application registers as a JACK client named `SuperLooper`.
 
+
+<img width="1920" height="981" alt="superlooper-v0-eaxyzs4jt0xg1" src="https://github.com/user-attachments/assets/d2e76bee-d5df-4615-bce8-7c6edbea8363" />
+
 ## Current Status
 
 This project is under active development. The primary tested build path is Qt5. CMake includes Qt6 selection support, but the Qt6 build path is currently untested.
